@@ -23,10 +23,10 @@ export function App() {
   //   }
   // }, []);
 
-  // useEffect(() => {
-  //   localStorage.setItem('contacts', JSON.stringify(contacts));
-  // }, [contacts]);
-//
+  useEffect(() => {
+    // localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
+  //
 
   const createContact = ({ name, number }, resetForm) => {
     const newContact = {
