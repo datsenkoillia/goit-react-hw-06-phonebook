@@ -1,32 +1,16 @@
 import { ContactForm } from 'components/ContactForm';
 import { Filter } from 'components/Filter';
 import { ContactList } from 'components/ContactList';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
+import { useSelector, useDispatch } from 'react-redux';
+import { create, del } from 'redux/contactsSlice';
+import { update } from 'redux/filterSlice';
 
 export function App() {
-  const [contacts, setContacts] = useState([
-    // { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    // { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    // { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    // { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  ]);
-
-  const [filter, setFilter] = useState('');
-
-  // useEffect(() => {
-  //   const savedToLocalStorageContacts = JSON.parse(
-  //     localStorage.getItem('contacts')
-  //   );
-  //   if (savedToLocalStorageContacts.length > 0) {
-  //     setContacts(savedToLocalStorageContacts);
-  //   }
-  // }, []);
-
-  useEffect(() => {
-    // localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
-  //
+  const contacts = useSelector(state => state.contacts.contacts);
+  const filter = useSelector(state => state.filter);
+  const dispatch = useDispatch();
 
   const createContact = ({ name, number }, resetForm) => {
     const newContact = {
@@ -41,16 +25,16 @@ export function App() {
       alert(`${name} is already in contacts`);
     } else {
       resetForm();
-      setContacts([...contacts, newContact]);
+      dispatch(create(newContact));
     }
   };
 
   const deleteContact = contactId => {
-    setContacts(contacts.filter(({ id }) => id !== contactId));
+    dispatch(del(contactId));
   };
 
   const changeFilter = event => {
-    setFilter(event.target.value);
+    dispatch(update(event.target.value));
   };
 
   const filteredContacts = () => {
@@ -68,6 +52,7 @@ export function App() {
       <h2>Contacts</h2>
       <Filter filter={filter} changeFilter={changeFilter} />
       <ContactList
+        // contactList={[contacts]}
         contactList={filteredContacts()}
         deleteContact={deleteContact}
       />
