@@ -4,12 +4,13 @@ import { ContactList } from 'components/ContactList';
 // import { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 import { useSelector, useDispatch } from 'react-redux';
-import { create, del } from 'redux/contactsSlice';
-import { update } from 'redux/filterSlice';
+import { create, del, update } from 'redux/contactsSlice';
+// import { update } from 'redux/filterSlice';
 
 export function App() {
   const contacts = useSelector(state => state.contacts.contacts);
-  const filter = useSelector(state => state.filter);
+  const filter = useSelector(state => state.contacts.filter);
+  console.log(filter);
   const dispatch = useDispatch();
 
   const createContact = ({ name, number }, resetForm) => {
@@ -38,9 +39,9 @@ export function App() {
   };
 
   const filteredContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
+    // const normalizedFilter = filter.toLowerCase();
     return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
+      contact.name.toLowerCase().includes(filter)
     );
   };
 

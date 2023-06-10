@@ -10,16 +10,11 @@ import {
 } from 'redux-persist';
 
 import { persistedContactsReducer } from './contactsSlice';
-import { filterReducer } from './filterSlice';
-
-// const reducer = combineReducers({
-//   contacts: persistedContactsReducer,
-//   filter: filterReducer,
-// });
+// import { filterReducer } from './filterSlice';
 
 const reducer = {
   contacts: persistedContactsReducer,
-  filter: filterReducer,
+  // filter: filterReducer,
 };
 
 export const store = configureStore({
@@ -33,4 +28,4 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-// console.log(persistor);
+
