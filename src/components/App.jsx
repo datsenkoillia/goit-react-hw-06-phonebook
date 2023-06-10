@@ -4,13 +4,18 @@ import { ContactList } from 'components/ContactList';
 // import { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 import { useSelector, useDispatch } from 'react-redux';
-import { create, del, update } from 'redux/contactsSlice';
+import {
+  create,
+  del,
+  update,
+  contactsSelector,
+  filterSelector,
+} from 'redux/contactsSlice';
 // import { update } from 'redux/filterSlice';
 
 export function App() {
-  const contacts = useSelector(state => state.contacts.contacts);
-  const filter = useSelector(state => state.contacts.filter);
-  console.log(filter);
+  const contacts = useSelector(contactsSelector);
+  const filter = useSelector(filterSelector);
   const dispatch = useDispatch();
 
   const createContact = ({ name, number }, resetForm) => {
