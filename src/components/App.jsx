@@ -58,7 +58,6 @@ export function App() {
       <h2>Contacts</h2>
       <Filter filter={filter} changeFilter={changeFilter} />
       <ContactList
-        // contactList={[contacts]}
         contactList={filteredContacts()}
         deleteContact={deleteContact}
       />
