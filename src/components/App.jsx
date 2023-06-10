@@ -7,11 +7,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   create,
   del,
-  update,
+  filtered,
   contactsSelector,
   filterSelector,
 } from 'redux/contactsSlice';
-// import { update } from 'redux/filterSlice';
+// import { filtered } from 'redux/filterSlice';
 
 export function App() {
   const contacts = useSelector(contactsSelector);
@@ -40,7 +40,7 @@ export function App() {
   };
 
   const changeFilter = event => {
-    dispatch(update(event.target.value));
+    dispatch(filtered(event.target.value));
   };
 
   const filteredContacts = () => {
